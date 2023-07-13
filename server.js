@@ -16,7 +16,7 @@ app.get("/teams", (req, res) => {
 })
 
 
-// MATCHES CRUD OPERATION
+// MATCHES CRUD OPERATION.
 
 // get all matches
 app.get("/matches", (req, res) => {
@@ -32,7 +32,7 @@ app.get("/getMatch/:id", (req, res) => {
         res.json({
             matches: data.matches.filter(match => match.id === parseInt(req.params.id))
         })
-        }
+    }
     else {
         res.status(400).send("no such member found");
     }
@@ -82,12 +82,74 @@ app.delete("/deleteMatch/:id", (req, res) => {
         res.json({
             matches: data.matches.filter(match => match.id !== parseInt(req.params.id))
         })
-        }
+    }
     else {
         res.status(400).send("no such member found");
     }
 
 })
+
+
+
+
+
+// TEAMS CRUD OPERATIONS.
+
+
+// get all teams
+app.get("/teams", (req, res) => {
+    res.send(data.teams)
+})
+
+
+// create a team
+
+app.post("/addTeam",(req,res)=>{
+    const {name,players}=req.body;
+    const teamId= data.teams.length+1;
+    const newTeam={id:teamId,name,players};
+    data.teams.push(newTeam);
+     res.json(newTeam);
+})
+
+
+// update a team
+
+// delete a team
+app.delete("/deleteTeam/:id", (req, res) => {
+
+    const found = data.teams.some(team => team.id === parseInt(req.params.id));
+    if (found) {
+        res.json({
+            matches: data.teams.filter(team => team.id !== parseInt(req.params.id))
+        })
+    }
+    else {
+        res.status(400).send("no such member found");
+    }
+
+})
+
+// get a player details
+app.get("/getPlayer/:id", (req, res) => {
+
+    const playerId = parseInt(req.params.id);
+    let playerFound = false;
+
+    data.teams.forEach(team => {
+        const player = team.players.find(player => player.id === playerId);
+        if (player) {
+            playerFound = true;
+            res.json(player);
+        }
+    });
+
+    if (!playerFound) {
+        res.status(404).json({ error: 'Player not found' });
+    }
+
+})
+
 
 
 
