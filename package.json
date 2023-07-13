@@ -1,7 +1,6 @@
 {
   "name": "HBCL_NODEJS",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "dependencies": {
     "express": "^4.18.2",
@@ -16,5 +15,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayanksharma-deloitte/HBCL-NODE-JS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mayanksharma-deloitte/HBCL-NODE-JS/issues"
+  },
+  "homepage": "https://github.com/mayanksharma-deloitte/HBCL-NODE-JS#readme",
+  "description": ""
 }
