@@ -92,6 +92,49 @@ app.delete("/deleteMatch/:id", (req, res) => {
 
 
 
+// get match by date
+
+app.get("/getMatchByDate/:date",(req,res)=>{
+
+   const match= data.matches.filter(match=>match.date===(req.params.date));
+   res.json(match);     
+
+})
+
+
+
+
+
+// get top scorer and wicket keepers in a team.
+
+// Get top scorers and wicket-takers in each team
+app.get('/teams/top-players', (req, res) => {
+    const topPlayers = [];
+    
+    data.teams.forEach(team => {
+      const teamPlayers = team.players;
+      
+      if (teamPlayers.length === 0) {
+        topPlayers.push({ team: team.name, players: [] });
+        return;
+      }
+      
+      const maxScore = Math.max(...teamPlayers.map(player => player.score));
+      const maxWickets = Math.max(...teamPlayers.map(player => player.wickets));
+      
+      const topScorers = teamPlayers.filter(player => player.score === maxScore);
+      const topWicketTakers = teamPlayers.filter(player => player.wickets === maxWickets);
+      
+      topPlayers.push({ team: team.name, topScorers, topWicketTakers });
+    });
+    
+    res.json(topPlayers);
+  });
+  
+
+
+
+
 
 // TEAMS CRUD OPERATIONS.
 
