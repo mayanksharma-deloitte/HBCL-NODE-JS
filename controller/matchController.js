@@ -71,7 +71,6 @@ exports.deleteMatch = (req, res) => {
 exports.matchDate = (req, res) => {
     const match = data.matches.filter(match => match.date === (req.params.date));
     res.json(match);
-
 }
 
 
